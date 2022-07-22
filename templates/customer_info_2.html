@@ -1,0 +1,45 @@
+{% extends 'customer_inhert.html' %}
+{% block content %}
+<div class="row clearfix">
+        <div class="container">
+            <div class="bs-example">
+                <div class="panel panel-default">
+
+                  <div class="panel-heading">
+                      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                      详细检测记录
+                  </div>
+
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th>检测时间</th>
+                          <th>检测结果</th>
+                          <th>图片名称</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in page_forms %}
+                        <form id={{ obj.id }}>
+                            <tr>
+                                <th scope="row">{{ obj.the_events }}</th>
+                                <td>{% if obj.result == 0 %}正常
+                                    {% elif obj.result == 1 %}边瑕疵
+                                    {% elif obj.result == 2 %}角瑕疵
+                                    {% elif obj.result == 3 %}白色点瑕疵
+                                    {% elif obj.result == 4 %}浅色块瑕疵
+                                    {% elif obj.result == 5 %}深色点瑕疵
+                                    {% elif obj.result == 6 %}光圈瑕疵
+                                {% endif %} </td>
+                                <td>{{ obj.pic_name }}</td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                <div class="pagination">{{ page_string }}</div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

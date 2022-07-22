@@ -1,0 +1,51 @@
+{% extends 'customer_inhert.html' %}
+{% block content %}
+<div class="row clearfix">
+        <div class="container">
+            <div class="bs-example">
+                <div class="panel panel-default">
+
+                  <div class="panel-heading">
+                      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                      历史检测记录
+                  </div>
+
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th>检测时间</th>
+                          <th>正常数量</th>
+                          <th>边瑕疵数量</th>
+                          <th>角瑕疵数量</th>
+                          <th>白色点瑕疵数量</th>
+                          <th>浅色块瑕疵数量</th>
+                          <th>深色点瑕疵数量</th>
+                          <th>光圈瑕疵数量</th>
+                          <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in page_forms %}
+                        <form id={{ obj.id }}>
+                            <tr>
+                                <th scope="row"> {{ obj.time|date:'Y-m-d H:i:s' }}</th>
+                                <td>{{ obj.re0 }}</td>
+                                <td>{{ obj.re1 }}</td>
+                                <td>{{ obj.re2 }}</td>
+                                <td>{{ obj.re3 }}</td>
+                                <td>{{ obj.re4 }}</td>
+                                <td>{{ obj.re5 }}</td>
+                                <td>{{ obj.re6 }}</td>
+                                <td><a style="color: yellow" class="btn btn-primary btn-xs" href="/customer/info2/?time={{ obj.time|date:'Y-m-d H:i:s' }}">详细记录</a>
+                                    <a style="color: red" class="btn btn-primary btn-xs" href="/customer/info/delete/?nid={{ obj.id }}">删除</a></td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                <div class="pagination">{{ page_string }}</div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'admin_inhert.html' %}
+{% block content %}
+    <div>
+        <div class="container">
+            <div class="bs-example">
+                <div class="panel panel-default">
+
+                  <div class="panel-heading">
+                      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                      用户表
+                  </div>
+
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>用户类型</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for obj in page_forms %}
+                        <form id={{ obj.id }}>
+                            <tr>
+                                <th scope="row"> {{ obj.user_name }}</th>
+                                <td>{{ obj.password }}</td>
+                                <td>{% if obj.user_type == 1 %}管理员
+                                    {% elif obj.user_type == 2 %}普通用户
+                                    {% endif %}</td>
+                                <td><a class="btn btn-primary btn-xs" href="/admin/{{ obj.id }}/edit/">修改</a>
+                                    <a style="color: red" class="btn btn-primary btn-xs" href="/admin/delete/?nid={{ obj.id }}">删除</a></td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                <div class="pagination">{{ page_string }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
